@@ -44,6 +44,10 @@ public class DatabaseMysql implements IDatabase {
         return DatabaseType.MYSQL;
     }
 
+    public String getHost() {
+        return host;
+    }
+
     public boolean connect() {
         try {
             if (ServerUtils.getServerVersionID() >= 17) {

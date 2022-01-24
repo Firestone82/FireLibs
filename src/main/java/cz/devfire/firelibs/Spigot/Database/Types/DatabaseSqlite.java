@@ -30,6 +30,10 @@ public class DatabaseSqlite implements IDatabase {
         return DatabaseType.SQLITE;
     }
 
+    public String getHost() {
+        return file.getName();
+    }
+
     public boolean connect() {
         try {
             Class.forName("org.sqlite.JDBC");

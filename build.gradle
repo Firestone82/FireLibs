@@ -1,0 +1,115 @@
+group 'FireLibs'
+apply plugin: 'java'
+apply plugin: 'base'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'maven-publish'
+
+version = "2.1.5"
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    shadowJar {
+        archiveName = "${project.name}.jar"
+        destinationDir = file("../archive/")
+    }
+
+    build {
+        dependsOn shadowJar
+    }
+}
+
+repositories {
+    maven {
+        url 'https://repo1.maven.org/maven2'
+    }
+
+    maven {
+        url 'http://nexus.basicland.cz:8081/repository/dev-nms/'
+        allowInsecureProtocol = true
+    }
+
+    maven {
+        url 'http://nexus.basicland.cz:8081/repository/dev-public/'
+        allowInsecureProtocol = true
+    }
+
+    maven {
+        url 'http://nexus.basicland.cz:8081/repository/dev-private/'
+        allowInsecureProtocol = true
+
+        credentials {
+            username "dev"
+            password "mandarinka"
+        }
+    }
+}
+
+dependencies {
+    // Spigot jars
+    compileOnly 'net.minecraft:server:1.8.8'
+    compileOnly 'org.spigotmc:spigot:1.8.8'
+
+    // Requirements
+    implementation 'com.github.cryptomorin:XSeries:8.6.0.0.1'
+
+    // Addons
+    compileOnly "me.clip:placeholderapi:2.10.9"
+}
+
+jar {
+    // def ver = version
+    // Integer increment = ver.substring(ver.lastIndexOf('.') + 1).toInteger() + 1
+    // String firstNumber = ver.substring(0, ver.lastIndexOf("."))
+    // String result = buildFile.getText().replaceFirst("version = \"$version\"", "version = \"" + firstNumber + "." + increment + "\"")
+    // buildFile.setText(result)
+
+    processResources {
+        outputs.upToDateWhen {false}
+
+        eachFile { details ->
+            if (details.name.contentEquals('plugin.yml')) {
+                filter { String line ->
+                    line.replace('${project.version}', version)
+                }
+            }
+        }
+    }
+}
+
+shadowJar {
+    dependsOn(jar)
+
+    archiveName = rootProject.name +"-"+ rootProject.version +".jar"
+    destinationDir = file("./target/")
+    from sourceSets.getByName("main").output
+    configurations = [project.configurations.getByName("runtimeClasspath")]
+}
+
+build {
+    dependsOn shadowJar
+    dependsOn publish
+}
+
+publish.shouldRunAfter shadowJar
+shadowJar.shouldRunAfter build
+
+publishing {
+    repositories {
+        mavenLocal()
+    }
+}

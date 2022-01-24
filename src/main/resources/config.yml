@@ -1,0 +1,11 @@
+Language:
+  NoPermissions: "&c&lServer &8&l» &7You don't have enough permissions!"
+  UnknownCommand: "&c&lServer &8&l» &7Unknown command, use &e/libs help"
+  Usage: "&c&lServer &8&l» &7Usage: &e{0}"
+  Help: "&c&lServer &8&l» &7Libs commands:"
+  HelpCommand: "&r &c# &e/{0} &8- &7{1}"
+  Reload: "&c&lServer &8&l» &7Plugin reloaded in &e{0}ms&7."
+  PlayerOnly: "&c&lServer &8&l» &7This command is player-only!"
+  Debug: "&c&lServer &8&l» &7Debugs: &egui&7,"
+  DebugStarted: "&c&lServer &8&l» &7Debugging &e{0}&7.."
+  Slots: "&c&lServer &8&l» &7Opened slots GUI."

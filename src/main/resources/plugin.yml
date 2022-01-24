@@ -1,0 +1,15 @@
+name: FireLibs
+version: ${project.version}
+main: cz.devfire.firelibs.Spigot.FireLibs
+load: STARTUP
+
+# Plugin information
+description: "Library plugin created for other plugins"
+author: "Firestone82"
+api-version: 1.13
+
+# Other plugins depend
+softdepend:
+  - PlaceholderAPI
+depend: []
+loadbefore: []

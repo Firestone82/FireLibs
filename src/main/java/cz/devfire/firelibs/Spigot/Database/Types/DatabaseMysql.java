@@ -75,11 +75,9 @@ public class DatabaseMysql implements IDatabase {
             if (args.startsWith("&")) args = args.substring(1);
 
             conn = DriverManager.getConnection("jdbc:mysql://"+ host +":"+ port +"/"+ db +"?"+ args,user,pass);
-
-            Bukkit.getConsoleSender().sendMessage("§a - Connecting database "+ host +"... §eSuccessful!");
             return true;
         } catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage("§c - Cannot connect to "+ host +"! Error: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -87,11 +85,9 @@ public class DatabaseMysql implements IDatabase {
     public boolean disconnect() {
         try {
             conn.close();
-
-            Bukkit.getConsoleSender().sendMessage("§c - Disconnecting database "+ host +"... §eSuccessful!");
             return true;
         } catch (Exception e) {
-            Bukkit.getConsoleSender().sendMessage("§c - Cannot disconnect from "+ host +"! Error: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }

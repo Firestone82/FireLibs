@@ -29,11 +29,11 @@ public class DatabaseMysql implements IDatabase {
 
     public DatabaseMysql(Plugin plugin, ConfigurationSection section) {
         this(plugin,
-                section.getString("Database.DB"),
-                section.getString("Database.Host"),
-                section.getString("Database.User"),
-                section.getString("Database.Pass"),
-                section.getInt("Database.Port",3306));
+                section.getString("DB"),
+                section.getString("Host"),
+                section.getString("User"),
+                section.getString("Pass"),
+                section.getInt("Port",3306));
     }
 
     public DatabaseMysql(Plugin plugin, String db, String host, String user, String pass) {

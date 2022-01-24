@@ -4,7 +4,7 @@ apply plugin: 'base'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'maven-publish'
 
-version = "2.1.8"
+version = "2.1.9"
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 

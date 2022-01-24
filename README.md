@@ -31,5 +31,7 @@
 
 ## Usage
 ```java
-FireLibs fireLibs = FireLibs.getInstance();
+CommandHandler commandHandler = FireLibs.getCommandHandler();
+PacketHandler packetHandler = FireLibs.getPacketHandler();
+PacketGUIHandler packetGUIHandler = FireLibs.getPacketGUIHandler();
 ```

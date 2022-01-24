@@ -4,6 +4,7 @@ import cz.devfire.firelibs.Spigot.Database.Objects.DatabaseType;
 import cz.devfire.firelibs.Spigot.Database.Objects.IDatabase;
 import cz.devfire.firelibs.Spigot.Utils.ServerUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.Connection;
@@ -25,6 +26,15 @@ public class DatabaseMysql implements IDatabase {
     private final int reconnectTries = 1;
 
     private Connection conn;
+
+    public DatabaseMysql(Plugin plugin, ConfigurationSection section) {
+        this(plugin,
+                section.getString("Database.DB"),
+                section.getString("Database.Host"),
+                section.getString("Database.User"),
+                section.getString("Database.Pass"),
+                section.getInt("Database.Port",3306));
+    }
 
     public DatabaseMysql(Plugin plugin, String db, String host, String user, String pass) {
         this(plugin,db, host, user, pass, 3306);
